@@ -15,7 +15,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     is_available = models.BooleanField(default=False)
-    pic_url = models.ImageField(upload_to="images/")
+    pic_url = models.ImageField(upload_to="store/static/store/images/")
     quantity = models.IntegerField(default=0)
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products")
