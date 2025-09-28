@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 def home(request):
-    return render(request, "store/home.html")
+    return render(request, "store/index.html")
 
 def signup(request):
     if request.method == "POST":
@@ -28,4 +28,17 @@ def signup(request):
         return render(request, "signup.html", {"form":form})
 
 
+def category(request):
+    return render(request, "store/category.html")
 
+def product(request):
+    return render(request, "store/product.html")
+
+def about(request):
+    return render(request, "store/about.html")
+
+def contact(request):
+    return HttpResponse("Not Available Right Now.")
+
+def services(request):
+    return HttpResponse("Not Available Right Now.")
