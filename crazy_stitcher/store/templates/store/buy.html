@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirm Your Pick</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff;
+      color: #333;
+      margin: 0;
+      padding: 0;
+}
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: orange;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+}
+
+.logo img {
+      height: 50px;
+}
+
+    nav {
+      display: flex;
+      gap: 20px;
+}
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+}
+
+    nav a:hover {
+      color: #f0f0f0;
+}
+
+.container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 30px;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      background-color: #fff;
+}
+
+    h2 {
+      text-align: center;
+      color: orange;
+      margin-bottom: 10px;
+}
+
+.intro {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 15px;
+      color: #555;
+}
+
+.order-details {
+      background-color: #fef6e4;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+}
+
+.order-details img {
+      width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 10px;
+}
+
+.order-details p {
+      margin: 5px 0;
+      font-size: 15px;
+}
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+}
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+}
+
+.checkbox-group {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+}
+
+.checkbox-group input[type="checkbox"] {
+      margin-right: 10px;
+}
+
+.checkbox-group p {
+      margin: 0;
+      font-size: 14px;
+}
+
+.btn {
+      display: block;
+      background-color: orange;
+      color: white;
+      text-align: center;
+      padding: 12px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+      transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+      background-color: #e69500;
+}
+
+.back-link {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: orange;
+      text-decoration: none;
+      font-weight: bold;
+}
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+}
+
+      nav {
+        margin-top: 10px;
+        flex-wrap: wrap;
+}
+}
+  </style>
+  {% load static %}
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="{% static 'store/images/logo.png' %}" alt="Crazy Stitcher Logo" />
+    </div>
+    <nav>
+      <a href="https://wa.me/7013931477?text='Welcome to Crazy Stitcher, Let us know why you contacted us'">Contact</a>
+      <a href="https://wa.me/7013931477?text='Thank you for using Crazy Stitcher, let us know your order'">Custom Order</a>
+      <a href="{% url 'review' %}">Reviews</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Confirm Your Pick</h2>
+    <p class="intro">Please fill in all the details correctly to complete your order.</p>
+
+    <form action="" method="POST">
+      {% csrf_token %}
+
+      <div class="order-details">
+	      <a href="{{ p.pic_url.url }}" target="_blank" alt="{{p.name}}">
+        <img src="{{ p.pic_url.url}}" alt="{{ p.name}}">
+	      </a>
+        <p><strong>Name:</strong> {{ p.name}}</p>
+        <p><strong>Category:</strong> {{ p.category}}</p>
+        <p><strong>Price:</strong> ₦ {{ p.price}}</p>
+        <p><strong>In Stock:</strong> {{ p.is_available|yesno:"Yes,No"}}</p>
+        <p><strong>Full Description:</strong> {{ p.description}}</p>
+      </div>
+
+      <label for="full-name">Enter your full name:</label>
+      <input type="text" id="full-name" name="full_name" placeholder="Your full name" required>
+
+      <label for="phone">Phone:</label>
+      <input type="number" id="phone" name="phone" placeholder="We need your phone number" required>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="agreement" name="agreement" checked required>
+        <p>I agree that the information above is correct</p>
+      </div>
+
+      <a class="btn" href="https://wa.me/2347013931477?text=Hello I want to buy one of your products. Here are the details: Name: {{p.name}}, Price: ₦{{p.price}}. Please send me your account details to complete the purchase. Reference path: {{path}}">Submit My Order</a>
+      <a class="back-link" href="{% url 'home' %}">← Back to Products</a>
+    </form>
+  </div>
+
+</body>
+</html>

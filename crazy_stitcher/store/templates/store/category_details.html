@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ category.name}} Category</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+}
+
+.category-container {
+            max-width: 800px;
+            margin: auto;
+            border: 2px solid orange;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff8f0;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.2);
+}
+
+.category-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+}
+
+        h1 {
+            color: orange;
+            font-size: 2em;
+            margin-bottom: 10px;
+}
+
+        details {
+            background-color: #fff;
+            border: 1px solid orange;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+}
+
+        a.view-products {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: orange;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+}
+
+        a.view-products:hover {
+            background-color: #e69500;
+}
+    </style>
+</head>
+<body>
+    <div class="category-container">
+        <img src="{{ category.pic.url}}" alt="{{ category.name}}" class="category-image">
+        <h1>Category: {{ category.name}}</h1>
+        <details>
+            <summary>Description</summary>
+            {{ category.description}}
+        </details>
+        <a href="{% url 'products_in_category' category.name %}" class="view-products">
+            View Products in this Category
+        </a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{% load static %}
+<style>
+  body {
+  background-color: #fff;
+  color: #333;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+.header {
+  background-color: #ff6600;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.header img {
+  max-height: 60px;
+  margin-bottom: 10px;
+}
+
+.reviews {
+  margin-top: 20px;
+}
+
+.review-card {
+  border: 1px solid #ff6600;
+  background-color: #fff8f0;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+.review-username {
+  color: #ff6600;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.review-text {
+  margin: 10px 0;
+}
+
+.review-date {
+  font-size: 0.9em;
+  color: #777;
+}
+
+a {
+  color: #ff6600;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+footer {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 0.9em;
+  color: #999;
+}
+</style>
+<div class="header">
+  <img src="{% static 'store/images/logo.png' %}" alt="Crazy Stitcher Logo">
+  <h1>Crazy Stitcher Reviews</h1>
+</div>
+
+<p>We value all our customer reviews to enhance our services. You can <a href="{% url 'add_review' %}">leave a review here</a>.</p>
+
+<h2>What customers say:</h2>
+<div class="reviews">
+  {% for review in reviews %}
+    <div class="review-card">
+      <h5 class="review-username">{{ review.username}}</h5>
+      <p class="review-text">{{ review.review}}</p>
+      <p class="review-date">{{ review.date}}</p>
+    </div>
+  {% empty %}
+  <p>No reviews yet. Be the first to <a href="{% url 'add_review' %}">leave a review</a>.</p>
+  {% endfor %}
+</div>
+
+<a href="{% url 'home' %}" class="back-link">← Back to Products</a>
+
+<footer>
+  <p>&copy; 2025 Crazy Stitcher – All Rights Reserved</p>
+</footer>
+
+

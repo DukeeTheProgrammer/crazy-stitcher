@@ -1,0 +1,160 @@
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crazy Stitcher - Products</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fff;
+            color: #333;
+            display: flex;
+}
+
+.main-content {
+            flex: 1;
+            padding: 30px;
+}
+
+.header {
+            text-align: center;
+            margin-bottom: 40px;
+}
+
+.header h1 {
+            color: orange;
+            font-size: 2.5em;
+            margin: 0;
+}
+
+.product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 30px;
+}
+
+.product-card {
+            background-color: #fff8f0;
+            border: 2px solid orange;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(255, 165, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+}
+
+.product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+}
+
+.product-card h2 {
+            font-size: 1.4em;
+            color: orange;
+            margin: 0 0 10px;
+}
+
+.product-card p {
+            margin: 5px 0;
+}
+
+.product-card.price {
+            font-weight: bold;
+            color: #e69500;
+}
+
+.product-card.actions {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+}
+
+.product-card button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+}
+
+.buy-btn {
+            background-color: orange;
+            color: white;
+}
+
+.buy-btn:hover {
+            background-color: #e69500;
+}
+
+.cart-btn {
+            background-color: white;
+            color: orange;
+            border: 2px solid orange;
+}
+
+.cart-btn:hover {
+            background-color: #fff0e0;
+}
+
+.cart-sidebar {
+            width: 300px;
+            background-color: #fff8f0;
+            border-left: 2px solid orange;
+            padding: 30px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            box-shadow: -2px 0 10px rgba(255, 165, 0, 0.1);
+}
+
+.cart-sidebar h3 {
+            color: orange;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+}
+
+.cart-sidebar p {
+            font-size: 0.95em;
+            color: #555;
+}
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <div class="header">
+            <h1>Crazy Stitcher</h1>
+        </div>
+
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <img src="{{ product.pic_url.url}}" alt="{{ product.name}}">
+                <h2>{{ product.name}}</h2>
+                <p class="price">₦{{ product.price}}</p>
+                <p>{{ product.description}}</p>
+                <p><strong>In Stock:</strong> {{ product.is_available|yesno:"Yes,No"}}</p>
+		<p><strong>Category :</strong>{{product.category}}</p>
+                <div class="actions">
+                    <button class="buy-btn">Buy Now</button>
+                    <button class="cart-btn">Add to Cart</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="cart-sidebar">
+      <h3>Your Cart 🛒</h3>
+        <p>No items yet. Start adding products!</p>
+    </div>
+</body>
+</html>
+
